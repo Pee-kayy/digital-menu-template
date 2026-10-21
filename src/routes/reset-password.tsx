@@ -7,7 +7,7 @@ import { PasswordInput } from "@/components/PasswordInput";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/reset-password")({
-  head: () => ({ meta: [{ title: "Reset password — Papi's Lounge" }] }),
+  head: () => ({ meta: [{ title: `Reset password — ${import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"}` },] }),
   component: ResetPasswordPage,
 });
 
