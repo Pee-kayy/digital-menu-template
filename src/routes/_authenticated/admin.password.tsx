@@ -31,7 +31,7 @@ function PasswordPage() {
       const { error: vErr } = await supabase.auth.signInWithPassword({ email, password: current });
       if (vErr) throw new Error("Current password is incorrect.");
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://papi-s-lounge-digital-menu.vercel.app/reset-password",
+        redirectTo: `${import.meta.env.VITE_MENU_URL?.replace("/menu", "") ?? window.location.origin}/reset-password`,
       });
       if (error) throw error;
       setSent(true);
