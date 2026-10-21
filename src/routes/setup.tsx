@@ -9,7 +9,7 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/setup")({
-  head: () => ({ meta: [{ title: "Setup — Papi's Lounge" }] }),
+  head: () => ({ meta: [{ title: "Setup — Restaurant Name" }] }),
   component: SetupPage,
 });
 
@@ -38,13 +38,22 @@ function SetupPage() {
     if (password !== confirm) return toast.error("Passwords do not match.");
     setSubmitting(true);
     try {
-      const { error: signUpErr } = await supabase.auth.signUp({
+      const { data: signUpData, error: signUpErr } = await supabase.auth.signUp({
         email,
         password,
         options: { emailRedirectTo: `${window.location.origin}/admin` },
       });
       if (signUpErr) throw signUpErr;
-      // Sign in (auto-confirm should be on, but explicit signIn ensures session)
+
+      // If email confirmation is required, the user won't be active yet
+      const needsConfirmation = !signUpData.session;
+      if (needsConfirmation) {
+        toast.success("Check your email and click the confirmation link to complete setup.");
+        setSubmitting(false);
+        return;
+      }
+
+      // No confirmation required — sign in immediately
       const { error: signInErr } = await supabase.auth.signInWithPassword({ email, password });
       if (signInErr) throw signInErr;
       const { error: upErr } = await supabase
@@ -67,7 +76,7 @@ function SetupPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-soft">
-        <h1 className="text-glow text-3xl font-semibold text-primary">Papi&apos;s Lounge</h1>
+        <h1 className="text-glow text-3xl font-semibold text-primary">Restaurant Name</h1>
         <p className="mt-1 text-sm text-muted-foreground">Owner setup — one-time only.</p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
@@ -78,7 +87,7 @@ function SetupPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="owner@papislounge.com"
+              placeholder="owner@restaurantname.com"
               maxLength={255}
             />
           </div>
