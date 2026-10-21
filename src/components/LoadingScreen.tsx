@@ -3,7 +3,9 @@ interface Props {
   fullscreen?: boolean;
 }
 
-export function LoadingScreen({ label = "Papi's Lounge", fullscreen = true }: Props) {
+const RESTAURANT_NAME = import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name";
+
+export function LoadingScreen({ label = RESTAURANT_NAME, fullscreen = true }: Props) {
   return (
     <div
       className={
