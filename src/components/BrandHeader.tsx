@@ -35,7 +35,7 @@ export function BrandHeader({
     <header className="sticky top-0 z-40 flex min-h-[120px] flex-col bg-brand-fade text-white md:min-h-[140px]">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pt-4 md:px-8 md:pt-5">
         <h1 className="text-glow truncate text-2xl font-semibold tracking-wide md:text-3xl">
-          Papi&apos;s Lounge
+                    {import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"}
         </h1>
         {mode === "admin" && (
           <Button
