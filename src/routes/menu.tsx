@@ -8,10 +8,10 @@ import { categoriesQuery, itemsQuery, useCategories, useItems } from "@/lib/menu
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: "Papi's Lounge — Menu" },
-      { name: "description", content: "Fresh coffee & lounge menu. Browse our drinks and bites." },
-      { property: "og:title", content: "Papi's Lounge — Menu" },
-      { property: "og:description", content: "Fresh coffee & lounge menu." },
+      { title: `${import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"} — Menu` },
+      { name: "description", content: "Browse our menu." },
+      { property: "og:title", content: `${import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"} — Menu` },
+      { property: "og:description", content: "Browse our menu." },
     ],
   }),
   loader: async ({ context }) => {
