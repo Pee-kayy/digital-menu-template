@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { openAdminMenu } from "./admin";
 
 // STATIC URL — never depends on database state
-const MENU_URL = "https://papi-s-lounge-digital-menu.vercel.app/menu";
+const MENU_URL = import.meta.env.VITE_MENU_URL ?? "https://digital-menu-template-puce.vercel.app/menu";
 
 export const Route = createFileRoute("/_authenticated/admin/qr")({
   component: QrPage,
@@ -35,7 +35,7 @@ function QrPage() {
         if (!blob) return;
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = "papis-lounge-qr.png";
+        a.download = `${import.meta.env.VITE_RESTAURANT_NAME ?? "restaurant"}-qr.png`;
         a.click();
         URL.revokeObjectURL(a.href);
       }, "image/png");
@@ -82,7 +82,7 @@ function QrPage() {
               includeMargin={false}
             />
           </div>
-          <p className="mt-6 text-glow text-2xl font-semibold text-primary">Papi&apos;s Lounge</p>
+          <p className="mt-6 text-glow text-2xl font-semibold text-primary">{import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"}</p>
           <p className="mt-1 break-all text-xs text-muted-foreground">{MENU_URL}</p>
 
           <div className="mt-6 flex flex-wrap justify-center gap-3 print:hidden">
