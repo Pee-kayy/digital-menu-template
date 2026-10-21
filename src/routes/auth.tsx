@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/PasswordInput";
 import { supabase } from "@/integrations/supabase/client";
 
+const RESTAURANT_NAME = import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name";
+
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in — Papi's Lounge" }] }),
+  head: () => ({ meta: [{ title: `Sign in — ${RESTAURANT_NAME}` }] }),
   component: AuthPage,
 });
 
@@ -44,7 +46,7 @@ function AuthPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-soft">
-        <h1 className="text-glow text-3xl font-semibold text-primary">Papi&apos;s Lounge</h1>
+        <h1 className="text-glow text-3xl font-semibold text-primary">{RESTAURANT_NAME}</h1>
         <p className="mt-1 text-sm text-muted-foreground">Staff sign in</p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
