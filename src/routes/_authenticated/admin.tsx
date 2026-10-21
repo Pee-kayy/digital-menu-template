@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useIdleLogout } from "@/hooks/useIdleLogout";
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Admin — Papi's Lounge" }] }),
+  head: () => ({ meta: [{ title: `Admin — ${import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"}` },] }),
   component: AdminLayout,
 });
 
@@ -64,7 +64,7 @@ function AdminLayout() {
         </SheetTrigger>
         <SheetContent side="right" className="w-[300px] bg-card">
           <SheetHeader>
-            <SheetTitle className="text-glow text-2xl text-primary">Papi&apos;s Lounge</SheetTitle>
+            <SheetTitle className="text-glow text-2xl text-primary">{import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name"}</SheetTitle>
           </SheetHeader>
           <nav className="mt-6 flex flex-col gap-1">
             {items.map((it) => (
