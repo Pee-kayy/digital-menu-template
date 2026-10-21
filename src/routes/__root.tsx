@@ -78,10 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Papi's Lounge" },
+      { title: import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name" },
       { name: "description", content: "Fresh Coffee & Lounge Experience — digital menu." },
-      { property: "og:title", content: "Papi's Lounge" },
-      { property: "og:description", content: "Fresh Coffee & Lounge Experience." },
+      { property: "og:title", content: import.meta.env.VITE_RESTAURANT_NAME ?? "Restaurant Name" },
+      { property: "og:description", content: "View our menu." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "theme-color", content: "#7B2CBF" },
